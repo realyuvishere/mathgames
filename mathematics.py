@@ -1,3 +1,4 @@
+import random
 from utils import *
 
 class MathQuestions:
@@ -31,7 +32,7 @@ class MathQuestions:
 
         cube = num**3
 
-        print_("printing cubes")
+        print("printing cubes")
 
         return [cube, num]
 
