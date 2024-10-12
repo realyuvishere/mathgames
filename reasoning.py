@@ -57,7 +57,7 @@ class ReasoningQuestions:
 
         question = "{}\n{}\n".format(part1, part2)
 
-        options = [answer] + [o for o in self.generate_random_options(3, len(answer))]
+        options = [answer] + [o for o in self.generate_random_options(3, len(answer), pattern)]
 
         random.shuffle(options)
 
@@ -65,26 +65,19 @@ class ReasoningQuestions:
 
         return [question, options, answer]
 
-    def generate_random_options(self, num, params=2):
+    def generate_random_options(self, num, params=2, pattern=callable(bool())):
         options = []
 
         for i in range(num):
-            x = random.randint(1, 10)
-            y = random.randint(1, 10)
-
-            if params == 3:
-                z = random.randint(1, 10)
-                options.append((x,y,z))
-            else:
-                options.append((x,y))
+            options.append(pattern(_random=True))
 
         return options
 
-    def pattern_1(self):
+    def pattern_1(self, _random=False):
         x = random.randint(1, 10)
 
-        a = self.a
-        b = self.b
+        a = random.randint(1, 10) if _random else self.a
+        b = random.randint(1, 10) if _random else self.b
 
         y = x*a + b
 

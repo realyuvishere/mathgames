@@ -51,6 +51,7 @@ class App:
         if self._game_loop:
             print("Enter 'qq' to go back to {} menu".format(self.levels["{}".format(self.level)]["name"]))
             print("Enter 'a' to display answer and a new question.")
+            print("Enter any key for a new question.")
         else:
             print("Enter 'q' to quit")
             if self.level != 0:
@@ -100,14 +101,21 @@ class App:
             if inp == "a":
                 print("Answer: {}".format(self.current_questions[-1][-1]))
 
-            self.current_questions.append(obj.generate_question(int(current_item)))
+            new_q = obj.generate_question(int(current_item))
+
+            if new_q not in self.current_questions:
+                self.current_questions.append(new_q)
+            else:
+                continue
             
             q = self.current_questions
             
             print("Question:\n{}\n".format(q[-1][0]))
             
-            for o in q[-1][1]:
-                print("{}".format(o))
+            if type(q[-1][1]) is list:
+                print("Options:")
+                for o in q[-1][1]:
+                    print("{}".format(o))
             
             self.read_input()
             inp = self.input

@@ -20,6 +20,14 @@ class MathQuestions:
     def __init__(self):
         pass
 
+    def generate_question(self, pattern_index=0):
+
+        pattern = getattr(self, self.index[str(pattern_index)]['method'])
+
+        question, answer = pattern()
+
+        return [question, answer]
+
     def guess_square_root(self):
         num = random.randint(1, 30)
 
@@ -31,8 +39,6 @@ class MathQuestions:
         num = random.randint(1, 30)
 
         cube = num**3
-
-        print("printing cubes")
 
         return [cube, num]
 
